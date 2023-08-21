@@ -132,8 +132,8 @@ def main():
     logger.addHandler(handler)
 
     print("Initializing scheduler")
-    scheduler = BlockingScheduler()  # use BlockingScheduler instead
-    scheduler.add_job(run_scraper, 'cron', hour=0, args=[logger])  # At midnight
+    scheduler = BlockingScheduler()
+    scheduler.add_job(run_scraper, 'cron', hour=0, args=[logger], misfire_grace_time=20)
 
     if TEST:
         console_log("Testing active, running scrapers immediately")
